@@ -1,7 +1,9 @@
-const { register} = require("../controllers/userController")
+const { register, getAllUsers, changeToAdmin} = require("../controllers/userController")
 
 const router = require ("express").Router()
 
-router.post("/user/registrar", register)
+router.get("/user", getAllUsers)
+router.post("/user/register", register)
+router.put("admin/:id", changeToAdmin)
 
 module.exports = router

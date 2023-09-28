@@ -16,11 +16,6 @@ const userSchema = new mongoose.Schema({
         require: true,
         trim: [true, "Tiene espacios"]
     },
-    repassword:{
-        type: String,
-        require: true,
-        trim: [true, "Tiene espacios"]
-    },
     rol: {
         type:String,
         default: "user",

@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Product = require("../models/productSchema");
+const cloudinary = require("cloudinary").v2
 
 const getAllProducts = async (req, res) => {
     const product = await Product.find().populate("category")
@@ -59,9 +60,10 @@ const getProductByID = async (req, res) => {
 
 
 const createProduct = async (req, res) => {
-    const { title, description, price, category, image, stock, favorite} = req.body;
+    const { title, description, price, category, stock, favorite} = req.body;
+    const {path} = req.file;
     const product = await Product.findOne({ title });
-    console.log(req.file)
+    const cloudImg = await cloudinary.uploader.upload(path);
 
     try {
         if (product) {
@@ -75,7 +77,7 @@ const createProduct = async (req, res) => {
             description,
             price,
             category,
-            image,
+            image: cloudImg.secure_url,
             stock,
             favorite
         })

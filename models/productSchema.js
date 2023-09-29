@@ -3,23 +3,28 @@ const Category = require("./categorySchema");
 
 const productSchema = new mongoose.Schema({
     title: {
-        type: String
+        type: String,
+        required:true 
     },
     description: {
-        type: String
+        type: String,
+        required:true 
     },
     price: {
-        type: Number
+        type: Number,
+        required:true 
     },
     category: {
         type: mongoose.Schema.Types.ObjectId,
         ref: Category
     },
     image: {
-        type: String
+        type: String,
+        required:true 
     },
     stock: {
-        type: Number
+        type: Number,
+        required:true 
     },
     favorite: {
         type: Boolean,

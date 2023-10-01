@@ -1,30 +1,32 @@
 const { getAllCategories, createCategory, deleteCategory } = require("../controllers/categoryControllers")
 const { getAllProducts, createProduct, deleteProduct, changeToFavorite, getProductByID, updateProduct } = require("../controllers/productController")
 const { register, getAllUsers, changeToAdmin, getUserByID, deleteUser, login, updateUser} = require("../controllers/userController")
+const authenticateAdmin = require("../middlewares/authAdmin")
+const authenticateUser = require("../middlewares/authUser")
 const upload = require ("../middlewares/multer")
 
 const router = require ("express").Router()
 
 // Users Routes
-router.get("/user", getAllUsers)
-router.get("/user/:id", getUserByID)
-router.delete("/user/:id", deleteUser)
-router.put("/user/:id", updateUser)
+router.get("/user", authenticateAdmin, getAllUsers)
+router.get("/user/:id", authenticateAdmin, getUserByID)
+router.delete("/user/:id", authenticateAdmin, deleteUser)
+router.put("/user/:id", authenticateUser, updateUser)
+router.put("/admin/:id", authenticateAdmin, changeToAdmin)
 router.post("/register", register)
 router.post("/login", login)
-router.put("/admin/:id", changeToAdmin)
 
 //Categorys Routes
 router.get("/categories", getAllCategories)
-router.post("/category", createCategory)
-router.delete("/category/:id", deleteCategory)
+router.post("/category", authenticateAdmin, createCategory)
+router.delete("/category/:id", authenticateAdmin, deleteCategory)
 
 //Products Routes
 router.get("/products", getAllProducts)
 router.get("/product/:id", getProductByID)
-router.post("/product", upload.single("image"), createProduct)
-router.delete("/product/:id", deleteProduct)
-router.put("/product/:id", changeToFavorite)
-router.put("/product/:id", updateProduct)
+router.post("/product", authenticateAdmin, upload.single("image"), createProduct)
+router.delete("/product/:id", authenticateAdmin, deleteProduct)
+router.put("/product/:id", authenticateUser, changeToFavorite)
+router.put("/product/:id", authenticateAdmin, updateProduct)
 
 module.exports = router

@@ -10,8 +10,8 @@ const productSchema = new mongoose.Schema({
         type: String,
         required:true 
     },
-    price: {
-        type: Number,
+    price: { 
+        type: String,
         required:true 
     },
     category: {
@@ -19,8 +19,7 @@ const productSchema = new mongoose.Schema({
         ref: Category
     },
     image: {
-        type: String,
-        required:true 
+        type: String
     },
     stock: {
         type: Number,

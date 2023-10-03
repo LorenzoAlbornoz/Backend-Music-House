@@ -6,7 +6,7 @@ module.exports = multer({
 
  fileFilter: (req, file, cb) => {
 
-    const fileTypes = /jpeg|jpg|png/ ; 
+    const fileTypes = /jpeg|jpg|png|webp/ ; 
     const mimeType = fileTypes.test(file.mimetype);
     const extname = fileTypes.test(path.extname(file.originalname).toLowerCase());
 

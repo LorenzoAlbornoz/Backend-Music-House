@@ -117,7 +117,6 @@ const changeToFavorite = async (req, res) => {
         product,
       });
     } catch (error) {
-      console.log(error)
       return res.status(500).json({
         mensaje: "Hubo un error, inténtelo más tarde",
         status: 500,
@@ -158,16 +157,14 @@ const changeToFavorite = async (req, res) => {
 
   const updateProduct = async (req, res) => {
     const { id } = req.params;
-    const { title, description, price, category, image, stock, favorite} = req.body;
+    const { title, description, price, category, stock} = req.body;
     try {
     const product = await Product.findByIdAndUpdate( id,{
         title,
         description,
         price,
         category,
-        image,
         stock,
-        favorite
     }, { new: true });
     if (!product) {
       return res.status(404).json({
@@ -182,6 +179,7 @@ const changeToFavorite = async (req, res) => {
       product
     });
     } catch (error) {
+      console.log(error)
       return res.status(500).json({
         mensaje: "Hubo un error, inténtelo más tarde",
         status: 500

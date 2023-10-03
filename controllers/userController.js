@@ -140,6 +140,7 @@ const changeToAdmin = async (req, res) => {
   const { rol } = req.body;
   const user = await User.findById(id);
   console.log(user)
+  console.log(rol)
   try {
     if (!user) {
       return res.status(404).json({

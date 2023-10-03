@@ -12,7 +12,7 @@ router.get("/user", authenticateAdmin, getAllUsers)
 router.get("/user/:id", authenticateAdmin, getUserByID)
 router.delete("/user/:id", authenticateAdmin, deleteUser)
 router.put("/user/:id", authenticateUser, updateUser)
-router.put("/admin/:id", authenticateAdmin, changeToAdmin)
+router.put("/admin/rol/:id", authenticateAdmin, changeToAdmin)
 router.post("/register", register)
 router.post("/login", login)
 
@@ -26,7 +26,7 @@ router.get("/products", getAllProducts)
 router.get("/product/:id", getProductByID)
 router.post("/product", authenticateAdmin, upload.single("image"), createProduct)
 router.delete("/product/:id", authenticateAdmin, deleteProduct)
-router.put("/product/:id", authenticateUser, changeToFavorite)
+// router.put("/product/:id", authenticateUser, changeToFavorite)
 router.put("/product/:id", authenticateAdmin, updateProduct)
 
 module.exports = router

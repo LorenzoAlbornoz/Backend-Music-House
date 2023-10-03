@@ -134,6 +134,31 @@ const getUserByID = async (req, res) => {
       });
     }
   };
+
+  const recoverPassword = async (req, res) => {
+    const { username } = req.body;
+    const user = await User.findOne({ username });
+  
+    try {
+      if (!user) {
+        return res.status(404).json({
+          mensaje: "Usuario no encontrado",
+          status: 404,
+        });
+      }
+      return res.status(200).json({
+        mensaje: "Se ha enviado un correo con instrucciones para recuperar la contraseña",
+        status: 200,
+      });
+    } catch (error) {
+      // Error de servidor 500
+      return res.status(500).json({
+        mensaje: "Hubo un error, inténtelo más tarde",
+        status: 500,
+      });
+    }
+  };
+  
   
 const changeToAdmin = async (req, res) => {
   const { id } = req.params;
@@ -267,5 +292,6 @@ const updateUser = async (req, res) => {
     getUserByID,
     deleteUser,
     login,
-    updateUser
+    updateUser,
+    recoverPassword
   }

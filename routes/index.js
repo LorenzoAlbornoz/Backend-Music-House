@@ -1,6 +1,6 @@
 const { getAllCategories, createCategory, deleteCategory } = require("../controllers/categoryControllers")
 const { getAllProducts, createProduct, deleteProduct, changeToFavorite, getProductByID, updateProduct } = require("../controllers/productController")
-const { register, getAllUsers, changeToAdmin, getUserByID, deleteUser, login, updateUser} = require("../controllers/userController")
+const { register, getAllUsers, changeToAdmin, getUserByID, deleteUser, login, updateUser, recoverPassword} = require("../controllers/userController")
 const authenticateAdmin = require("../middlewares/authAdmin")
 const authenticateUser = require("../middlewares/authUser")
 const upload = require ("../middlewares/multer")
@@ -15,6 +15,7 @@ router.put("/user/:id", authenticateUser, updateUser)
 router.put("/admin/rol/:id", authenticateAdmin, changeToAdmin)
 router.post("/register", register)
 router.post("/login", login)
+router.post("/recoverPassword", recoverPassword)
 
 //Categorys Routes
 router.get("/categories", getAllCategories)

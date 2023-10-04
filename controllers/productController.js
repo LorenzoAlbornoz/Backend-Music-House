@@ -3,10 +3,10 @@ const Product = require("../models/productSchema");
 const cloudinary = require("cloudinary").v2
 
 const getAllProducts = async (req, res) => {
-    const product = await Product.find().populate("category")
+    const products = await Product.find().populate("category")
 
     try {
-        if (!product) {
+        if (!products) {
             return res.status(404).json({
                 mensaje: "Productos no encontrados",
                 status: 404
@@ -16,7 +16,7 @@ const getAllProducts = async (req, res) => {
         return res.status(200).json({
             mensaje: "Productos encontrados",
             status: 200,
-            product
+            products
         });
 
     } catch {

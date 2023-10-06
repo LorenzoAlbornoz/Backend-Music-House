@@ -60,7 +60,7 @@ const getProductByID = async (req, res) => {
 
 
 const createProduct = async (req, res) => {
-    const { title, description, price, category, stock, favorite} = req.body;
+    const { title, description, price, category, stock, favorite, quantity} = req.body;
     const {path} = req.file;
     const product = await Product.findOne({ title });
     const cloudImg = await cloudinary.uploader.upload(path);
@@ -79,7 +79,8 @@ const createProduct = async (req, res) => {
             category,
             image: cloudImg.secure_url,
             stock,
-            favorite
+            favorite,
+            quantity
         })
         await newProduct.save();
 

@@ -84,7 +84,6 @@ La biblioteca Mongoose se utiliza para facilitar la interacción con la base de 
 
 npm install mongoose
 
-## Controladores y Esquema
 ## Controlador de Usuarios (userController)
 Los controladores son funciones que manejan las solicitudes HTTP entrantes y gestionan la lógica de negocio de la aplicación. El controlador de usuarios (userController) incluye las siguientes funciones:
 

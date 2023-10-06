@@ -36,7 +36,7 @@ const productSchema = new mongoose.Schema({
         default: false
     },
     quantity:{
-        type: number,
+        type: Number,
         default:1
     }
 })

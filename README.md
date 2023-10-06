@@ -1,15 +1,15 @@
-LAM Music Store
+## LAM Music Store
 Descripción del Proyecto
 LAM Music Store es un sitio web de comercio electrónico dedicado a la venta de artículos musicales. Ofrecemos una amplia variedad de instrumentos, equipos de sonido, accesorios y más, para músicos de todos los niveles y estilos. Nuestro objetivo es brindar a los amantes de la música una plataforma confiable y conveniente para adquirir los productos que necesitan.
 
-Equipo de Desarrollo
+## Equipo de Desarrollo
 Este proyecto fue desarrollado por el equipo de LAM Music Store, compuesto por:
 
 Lorenzo Albornoz
 Franco Salas
 Bruno Busnelli
 
-Instalación
+## Instalación
 
 Para comenzar a trabajar con este proyecto en tu entorno local, sigue estos pasos:
 
@@ -23,7 +23,7 @@ Instala las dependencias usando npm:
 npm install
 Este comando instalará todas las dependencias necesarias para ejecutar la aplicación.
 
-Inicia la aplicación:
+## Inicia la aplicación:
 
 npm run dev
 
@@ -33,7 +33,7 @@ Express es el framework utilizado para gestionar las rutas y las solicitudes HTT
 npm install express
 
 
-Instalación de Nodemon:
+## Instalación de Nodemon:
 Nodemon se utiliza para facilitar el arranque del servidor y la actualización automática de la aplicación web durante el desarrollo. Para instalarlo, ejecuta:
 
 npm install nodemon --save-dev
@@ -43,10 +43,10 @@ Luego, agrega el siguiente script en tu archivo package.json para iniciar el ser
   "dev": "nodemon server.js"
 }
 
-Utilización de Postman:
+## Utilización de Postman:
 Usa la herramienta Postman para simular peticiones HTTP y probar la funcionalidad del servidor.
 
-Instalación de Middlewares:
+## Instalación de Middlewares:
 A continuación, se describen los middlewares instalados y configurados para la aplicación:
 
 CORS:
@@ -64,13 +64,13 @@ permite acceder a las variables de entorno de manera segura. Para instalarlo, ut
 
 npm install dotenv
 
-Creación del Enrutamiento Modular:
+## Creación del Enrutamiento Modular:
 La aplicación utiliza módulos de enrutamiento modular (router) para organizar y gestionar las rutas de manera eficiente. Esto mejora la estructura y mantenimiento del código.
 
-Variables de Entorno:
+## Variables de Entorno:
 Se han configurado variables de entorno para garantizar el funcionamiento adecuado y seguro de la aplicación, evitando la inclusión de información confidencial en el código. Se proporciona un archivo example.env con copias vacías de las variables de entorno para referencia.
 
-Creación de la Estructura del Backend:
+## Creación de la Estructura del Backend:
 Establece la estructura y la organización de las carpetas para el backend de la aplicación.
 
 Configuración de la Base de Datos MongoDB:
@@ -79,13 +79,13 @@ Creamos una base de datos NoSQL en MongoDB.
 
 Establece la conexión entre la aplicación y la base de datos.
 
-Instalación de Mongoose:
+## Instalación de Mongoose:
 La biblioteca Mongoose se utiliza para facilitar la interacción con la base de datos MongoDB, simplificando la definición de esquemas, las validaciones y las operaciones de base de datos en formato JSON. Instálalo con:
 
 npm install mongoose
 
-Controladores y Esquema
-Controlador de Usuarios (userController)
+## Controladores y Esquema
+## Controlador de Usuarios (userController)
 Los controladores son funciones que manejan las solicitudes HTTP entrantes y gestionan la lógica de negocio de la aplicación. El controlador de usuarios (userController) incluye las siguientes funciones:
 
 getAllUsers
@@ -106,7 +106,7 @@ La función deleteUser está diseñada para que los administradores puedan elimi
 changeToAdmin
 La función changeToAdmin permite a los administradores cambiar el rol de un usuario entre "user" y "admin" y viceversa.
 
-Esquema de Usuario (userSchema)
+## Esquema de Usuario (userSchema)
 El esquema userSchema define la estructura en la que se guardan los datos de usuario en la base de datos. Incluye los siguientes campos:
 
 name: Nombre del usuario.
@@ -114,7 +114,7 @@ username: Nombre de usuario único.
 password: Contraseña del usuario (encriptada de manera segura).
 rol: Rol del usuario, que puede ser "user" o "admin".
 
-Controlador de Categorías (categoryController)
+## Controlador de Categorías (categoryController)
 El controlador de categorías (categoryController) incluye las siguientes funciones:
 
 createCategory
@@ -123,14 +123,14 @@ La función createCategory permite crear nuevas categorías en la aplicación.
 getAllCategory
 La función getAllCategory recupera todas las categorías creadas en la base de datos.
 
-Esquema de Categoría (categorySchema)
+## Esquema de Categoría (categorySchema)
 El esquema categorySchema define la estructura en la que se guardan los datos de categoría en la base de datos. Incluye los siguientes campos:
 
 name: El nombre de la categoría.
 createdAt: La fecha en que se creó la categoría (tipo de dato Date).
 products: Una relación uno a muchos que conecta una categoría con los productos relacionados. Esto se logra a través del ID de la categoría en los productos.
 
-El controlador de productos (productController) incluye las siguientes funciones:
+## El controlador de productos (productController) incluye las siguientes funciones:
 
 createProduct
 La función createProduct permite la creación de nuevos productos en la base de datos.
@@ -160,7 +160,7 @@ Para instalar cloudinary:
 
 npm install cloudinary
 
-Esquema de Producto (productSchema)
+## Esquema de Producto (productSchema)
 El esquema productSchema define la estructura en la que se guardan los datos de productos en la base de datos. Incluye los siguientes campos:
 
 titulo: El título del producto.

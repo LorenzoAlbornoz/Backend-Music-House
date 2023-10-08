@@ -29,10 +29,10 @@ const getAllProducts = async (req, res) => {
 
 
 const getProductByID = async (req, res) => {
-    const { id } = req.params;
-    const product = await Product.findById(id);
+    const { _id } = req.params;
+    const product = await Product.findById(_id);
     try {
-        if (!mongoose.isValidObjectId(id)) {
+        if (!mongoose.isValidObjectId(_id)) {
             return res.status(400).json({
                 mensaje: "Id inválido",
                 status: 400,

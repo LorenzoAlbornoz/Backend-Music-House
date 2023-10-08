@@ -60,7 +60,7 @@ const getProductByID = async (req, res) => {
 
 
 const createProduct = async (req, res) => {
-    const { title, description, price, category, stock, favorite, quantity} = req.body;
+    const { title, description, price, category, stock, isFeatured, quantity} = req.body;
     const {path} = req.file;
     const product = await Product.findOne({ title });
     const cloudImg = await cloudinary.uploader.upload(path);
@@ -79,7 +79,7 @@ const createProduct = async (req, res) => {
             category,
             image: cloudImg.secure_url,
             stock,
-            favorite,
+            isFeatured,
             quantity
         })
         await newProduct.save();
@@ -158,7 +158,7 @@ const changeToFavorite = async (req, res) => {
 
   const updateProduct = async (req, res) => {
     const { id } = req.params;
-    const { title, description, price, category, stock} = req.body;
+    const { title, description, price, category, stock, isFeatured} = req.body;
     try {
     const product = await Product.findByIdAndUpdate( id,{
         title,
@@ -166,6 +166,7 @@ const changeToFavorite = async (req, res) => {
         price,
         category,
         stock,
+        isFeatured
     }, { new: true });
     if (!product) {
       return res.status(404).json({
@@ -188,11 +189,41 @@ const changeToFavorite = async (req, res) => {
     }
   };
 
+  const toggleProductFeaturedStatus = async (req, res) => {
+    const { id } = req.params;
+    const { isFeatured } = req.body;
+    const product = await Product.findById(id);
+    try {
+      if (!product) {
+        return res.status(404).json({
+          mensaje: 'Producto no encontrado',
+          status: 404,
+        });
+      }
+  
+      product.isFeatured = isFeatured;
+      await product.save();
+  
+      res.status(200).json({
+        mensaje: 'Producto actualizado correctamente',
+        status: 200,
+        product,
+      });
+    } catch (error) {
+      console.log(error)
+      return res.status(500).json({
+        mensaje: 'Hubo un error, inténtelo más tarde',
+        status: 500,
+      });
+    }
+  };
+
 module.exports = {
     getAllProducts,
     getProductByID,
     createProduct,
     changeToFavorite,
     deleteProduct,
-    updateProduct
+    updateProduct,
+    toggleProductFeaturedStatus
 }

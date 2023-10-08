@@ -31,9 +31,9 @@ const productSchema = new mongoose.Schema({
             message: "El stock debe ser mayor que 0" 
         }
     },
-    favorite: {
+    isFeatured: {
         type: Boolean,
-        default: false
+        default: false 
     },
     quantity:{
         type: Number,

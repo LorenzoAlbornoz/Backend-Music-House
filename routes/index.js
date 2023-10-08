@@ -24,7 +24,7 @@ router.delete("/category/:id", authenticateAdmin, deleteCategory)
 
 //Products Routes
 router.get("/products", getAllProducts)
-router.get("/product/:id", getProductByID)
+router.get("/product/_id", getProductByID)
 router.post("/product", authenticateAdmin, upload.single("image"), createProduct)
 router.delete("/product/:id", authenticateAdmin, deleteProduct)
 // router.put("/product/:id", authenticateUser, changeToFavorite)

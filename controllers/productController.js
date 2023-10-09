@@ -60,7 +60,7 @@ const getProductByID = async (req, res) => {
 
 
 const createProduct = async (req, res) => {
-    const { title, description, price, category, stock, isFeatured, quantity} = req.body;
+    const { title, description, price, category, stock, isFeatured, shortDescription} = req.body;
     const {path} = req.file;
     const product = await Product.findOne({ title });
     const cloudImg = await cloudinary.uploader.upload(path);
@@ -80,7 +80,7 @@ const createProduct = async (req, res) => {
             image: cloudImg.secure_url,
             stock,
             isFeatured,
-            quantity
+            shortDescription
         })
         await newProduct.save();
 
@@ -158,7 +158,7 @@ const changeToFavorite = async (req, res) => {
 
   const updateProduct = async (req, res) => {
     const { id } = req.params;
-    const { title, description, price, category, stock, isFeatured} = req.body;
+    const { title, description, price, category, stock, isFeatured, shortDescription} = req.body;
     try {
     const product = await Product.findByIdAndUpdate( id,{
         title,
@@ -166,7 +166,8 @@ const changeToFavorite = async (req, res) => {
         price,
         category,
         stock,
-        isFeatured
+        isFeatured,
+        shortDescription
     }, { new: true });
     if (!product) {
       return res.status(404).json({

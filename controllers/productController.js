@@ -30,7 +30,7 @@ const getAllProducts = async (req, res) => {
 
 const getProductByID = async (req, res) => {
     const { _id } = req.params;
-    const product = await Product.findById(_id).populete("category");
+    const product = await Product.findById(_id).populate("category");
     try {
         if (!mongoose.isValidObjectId(_id)) {
             return res.status(400).json({

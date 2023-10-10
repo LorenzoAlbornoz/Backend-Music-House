@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 const User = require("../models/userSchema.js");
+const Product = require("../models/productSchema.js");
+
 const {
   encryptPassword,
   comparePassword,
@@ -285,6 +287,99 @@ const updateUser = async (req, res) => {
   }
 };
 
+const addToFavorites = async (req, res) => {
+  const { id } = req.params;
+  const { productId,addToFavorites} = req.body 
+
+  try {
+    const user = await User.findById(id);
+    const product = await Product.findById(productId);
+
+    if (!user ) {
+      return res.status(404).json({
+        mensaje: "Usuario no encontrado",
+        status: 404,
+      });
+    }
+
+    if (!product) {
+      return res.status(404).json({
+        mensaje: " no encontrado",
+        status: 404,
+      });
+    }
+
+    // Verifica si el producto ya está en la lista de favoritos del usuario
+    // el some recorre todo el arreglo, devuelve true si safistafe la condicion de igualdad
+    //el equals toma cada elemento del arreglo y verifica si es igual al id
+    const isProductInFavorites = user.favorites.some((favProduct) =>
+      favProduct.equals(product._id)
+    );
+
+    // Variable para almacenar el nuevo estado de isFavorite
+    let newIsFavorite;
+
+    // Si addToFavorites es verdadero y el producto no está en favoritos, agrégalo
+    if (addToFavorites && !isProductInFavorites) {
+      user.favorites.push(product);
+      product.isFavorite = true; // Cambia isFavorite a true
+      newIsFavorite = true;
+    }
+    // Si addToFavorites es falso o el producto ya está en favoritos, lo quita
+    else {
+      user.favorites = user.favorites.filter(
+        (favProduct) => !favProduct.equals(product._id)
+      );
+      product.isFavorite = false; // Cambia isFavorite a false
+      newIsFavorite = false;
+    }
+    console.log(newIsFavorite)
+
+    await user.save();
+    await product.save();
+    res.status(200).json({
+      mensaje: "Producto agregado a favoritos correctamente",
+      status: 200,
+      user,
+    });
+  } catch (error) {
+    console.error(error)
+    return res.status(500).json({
+      mensaje: "Hubo un error, inténtelo más tarde",
+      status: 500,
+    });
+  }
+};
+
+const getFavoriteProducts = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    // Buscar al usuario por su ID
+    const user = await User.findById(id);
+
+    if (!user) {
+      return res.status(404).json({
+        mensaje: "Usuario no encontrado",
+        status: 404,
+      });
+    }
+
+    const favoriteProducts = await Product.find({ _id: { $in: user.favorites } });
+
+    res.status(200).json({
+      mensaje: "Lista de productos favoritos obtenida correctamente",
+      status: 200,
+      favoriteProducts,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      mensaje: "Hubo un error, inténtelo más tarde",
+      status: 500,
+    });
+  }
+};
+
   module.exports = {
     getAllUsers,
     register,
@@ -293,5 +388,7 @@ const updateUser = async (req, res) => {
     deleteUser,
     login,
     updateUser,
-    recoverPassword
+    recoverPassword,
+    addToFavorites,
+    getFavoriteProducts
   }

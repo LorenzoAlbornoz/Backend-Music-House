@@ -35,6 +35,10 @@ const productSchema = new mongoose.Schema({
         type: Boolean,
         default: false 
     },
+    isFavorite: {
+        type: Boolean,
+        default: false 
+    },
     shortDescription:{
     type: String,
     require: true
@@ -43,5 +47,7 @@ const productSchema = new mongoose.Schema({
 ;
 
 
+
 const Product = mongoose.model("Product", productSchema)
 module.exports = Product;
+

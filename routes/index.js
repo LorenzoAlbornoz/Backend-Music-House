@@ -1,6 +1,6 @@
 const { getAllCategories, createCategory, deleteCategory } = require("../controllers/categoryControllers")
-const { getAllProducts, createProduct, deleteProduct, changeToFavorite, getProductByID, updateProduct, toggleProductFeaturedStatus } = require("../controllers/productController")
-const { register, getAllUsers, changeToAdmin, getUserByID, deleteUser, login, updateUser, recoverPassword} = require("../controllers/userController")
+const { getAllProducts, createProduct, deleteProduct, changeToFavorite, getProductByID, updateProduct, toggleProductFeaturedStatus, getProductsByTitle } = require("../controllers/productController")
+const { register, getAllUsers, changeToAdmin, getUserByID, deleteUser, login, updateUser, recoverPassword, getFavoriteProducts, addToFavorites} = require("../controllers/userController")
 const authenticateAdmin = require("../middlewares/authAdmin")
 const authenticateUser = require("../middlewares/authUser")
 const upload = require ("../middlewares/multer")
@@ -16,6 +16,8 @@ router.put("/admin/rol/:id", authenticateAdmin, changeToAdmin)
 router.post("/register", register)
 router.post("/login", login)
 router.post("/recoverPassword", recoverPassword)
+router.post("/user/favorite/:id", addToFavorites)
+router.get("/favorite/:id", authenticateUser, getFavoriteProducts)
 
 //Categorys Routes
 router.get("/categories", getAllCategories)
@@ -25,6 +27,7 @@ router.delete("/category/:id", authenticateAdmin, deleteCategory)
 //Products Routes
 router.get("/products", getAllProducts)
 router.get("/product/:_id", getProductByID)
+router.get("/products/search", getProductsByTitle);
 router.post("/product", authenticateAdmin, upload.single("image"), createProduct)
 router.delete("/product/:id", authenticateAdmin, deleteProduct)
 // router.put("/product/:id", authenticateUser, changeToFavorite)

@@ -58,6 +58,34 @@ const getProductByID = async (req, res) => {
     }
 };
 
+const getProductsByTitle = async (req, res) => {
+  const { title } = req.query;
+
+  try {
+    if (!title) {
+      return res.status(400).json({
+        mensaje: "El parámetro 'title' es requerido",
+        status: 400,
+      });
+    }
+
+    // Usar una expresión regular para buscar coincidencias parciales en el título
+    const products = await Product.find({
+      title: { $regex: new RegExp(title, "i") }, // "i" hace que la búsqueda sea insensible a mayúsculas/minúsculas
+    }).populate("category");
+
+    return res.status(200).json({
+      mensaje: "Productos encontrados",
+      status: 200,
+      products,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      mensaje: "Hubo un error, inténtelo más tarde",
+      status: 500,
+    });
+  }
+};
 
 const createProduct = async (req, res) => {
     const { title, description, price, category, stock, isFeatured, shortDescription} = req.body;
@@ -222,6 +250,7 @@ const changeToFavorite = async (req, res) => {
 module.exports = {
     getAllProducts,
     getProductByID,
+    getProductsByTitle,
     createProduct,
     changeToFavorite,
     deleteProduct,

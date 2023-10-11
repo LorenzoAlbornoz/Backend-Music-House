@@ -32,57 +32,57 @@ Express es el framework utilizado para gestionar las rutas y las solicitudes HTT
 
 npm install express
 
+## Tecnologia Principal
+NodeJS - FrameWork Back-End
 
-## Instalación de Nodemon:
-Nodemon se utiliza para facilitar el arranque del servidor y la actualización automática de la aplicación web durante el desarrollo. Para instalarlo, ejecuta:
+## Frameworks adicionales y otras implementaciones
 
-npm install nodemon --save-dev
-Luego, agrega el siguiente script en tu archivo package.json para iniciar el servidor con Nodemon:
+Express - Infraestructura web rápida, minimalista y flexible para Node.js
+nodemon - Actualiza tu servidor de Node cuando realizas cambios en algun archivo
+Bcrypt - Encriptación
+JWT - Generar tokens
+Mongoose - Modelado de objetos MongoDB para Node.js
+morgan - HTTP request logger middleware for node.js
+passport - Autenticaciones en NodeJs
+passport-jwt - Estrategia de Passport para la autenticación basada en tokens JWT (JSON Web Tokens).
+jsonwebtoken - Librería para la implementación de tokens JWT (JSON Web Tokens) en la autenticación de usuarios.
+dotenv - Variables de Entorno
+cors - Control de Acceso HTTP
+multer - Manejo de archivos en NodeJS
+cloudinary - Almacenamiento de imagenes y videos
+Base de Datos
+MongoDB Atlas - Cloud
 
-"scripts": {
-  "dev": "nodemon server.js"
-}
+## Routes
 
-## Utilización de Postman:
-Usa la herramienta Postman para simular peticiones HTTP y probar la funcionalidad del servidor.
+## Users
 
-## Instalación de Middlewares:
-A continuación, se describen los middlewares instalados y configurados para la aplicación:
+GET /api/v1/user
+GET /api/v1/user/:id
+DELETE /api/v1/user/:id
+PUT /api/v1/user/:id
+PUT /api/v1/admin/rol/:id
+POST /api/v1/recoverPassword
+POST /api/v1/user/favorite/:id
+GET /api/v1/favorite/:id
 
-CORS:
-Permite el acceso controlado a los recursos de la aplicación desde orígenes cruzados o dominios diferentes, útil para solicitudes HTTP desde fuentes externas:
+## Registrar un nuevo usuario
+POST /api/v1/user/register
 
-npm install cors
+## Para loguearse y obtener el token de autenticacion:
+POST /api/v1/user/login
 
-Morgan:
-se encarga de mostrar los errores de las peticiones HTTP en la consola. Instálalo con:
+## Categorias Routes
+GET /api/v1/categories
+POST /api/v1/category
 
-npm install morgan
-
-Dotenv:
-permite acceder a las variables de entorno de manera segura. Para instalarlo, utiliza:
-
-npm install dotenv
-
-## Creación del Enrutamiento Modular:
-La aplicación utiliza módulos de enrutamiento modular (router) para organizar y gestionar las rutas de manera eficiente. Esto mejora la estructura y mantenimiento del código.
-
-## Variables de Entorno:
-Se han configurado variables de entorno para garantizar el funcionamiento adecuado y seguro de la aplicación, evitando la inclusión de información confidencial en el código. Se proporciona un archivo example.env con copias vacías de las variables de entorno para referencia.
-
-## Creación de la Estructura del Backend:
-Establece la estructura y la organización de las carpetas para el backend de la aplicación.
-
-Configuración de la Base de Datos MongoDB:
-
-Creamos una base de datos NoSQL en MongoDB.
-
-Establece la conexión entre la aplicación y la base de datos.
-
-## Instalación de Mongoose:
-La biblioteca Mongoose se utiliza para facilitar la interacción con la base de datos MongoDB, simplificando la definición de esquemas, las validaciones y las operaciones de base de datos en formato JSON. Instálalo con:
-
-npm install mongoose
+## Products Routes
+GET /api/v1/products
+GET /api/v1/product/:_id
+POST /api/v1/product
+DELETE /api/v1/product/:id
+PUT /api/v1/product/:id
+PUT /api/v1/product/feature/:id
 
 ## Controlador de Usuarios (userController)
 Los controladores son funciones que manejan las solicitudes HTTP entrantes y gestionan la lógica de negocio de la aplicación. El controlador de usuarios (userController) incluye las siguientes funciones:
@@ -139,7 +139,8 @@ name: El nombre de la categoría.
 createdAt: La fecha en que se creó la categoría (tipo de dato Date).
 products: Una relación uno a muchos que conecta una categoría con los productos relacionados. Esto se logra a través del ID de la categoría en los productos.
 
-## El controlador de productos (productController) incluye las siguientes funciones:
+## Controlador de Productos (productController)
+El controlador de productos (productController) incluye las siguientes funciones:
 
 createProduct
 La función createProduct permite la creación de nuevos productos en la base de datos.
@@ -153,11 +154,11 @@ La función getProductById recupera un producto específico mediante su identifi
 deleteProduct
 La función deleteProduct elimina un producto de la base de datos.
 
-updateProduct
-La función updateProduct actualiza la información de un producto existente en la base de datos.
-
 toggleProductFeaturedStatus
 La funcion toggleProductFeaturedStatus cambia los productos de no destacados a destacados.
+
+updateProduct
+La función updateProduct actualiza la información de un producto existente en la base de datos.
 
 Instalar Multer
 Para manejar la carga de archivos, como imágenes, en la aplicación, se instala Multer, una biblioteca de middleware que permite recibir archivos enviados a través de formularios.

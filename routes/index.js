@@ -1,5 +1,5 @@
 const { getAllCategories, createCategory, deleteCategory } = require("../controllers/categoryControllers")
-const { getAllProducts, createProduct, deleteProduct, changeToFavorite, getProductByID, updateProduct, toggleProductFeaturedStatus, getProductsByTitle } = require("../controllers/productController")
+const { getAllProducts, createProduct, deleteProduct, getProductByID, updateProduct, toggleProductFeaturedStatus } = require("../controllers/productController")
 const { register, getAllUsers, changeToAdmin, getUserByID, deleteUser, login, updateUser, recoverPassword, getFavoriteProducts, addToFavorites} = require("../controllers/userController")
 const authenticateAdmin = require("../middlewares/authAdmin")
 const authenticateUser = require("../middlewares/authUser")
@@ -27,10 +27,8 @@ router.delete("/category/:id", authenticateAdmin, deleteCategory)
 //Products Routes
 router.get("/products", getAllProducts)
 router.get("/product/:_id", getProductByID)
-router.get("/products/search", getProductsByTitle);
 router.post("/product", authenticateAdmin, upload.single("image"), createProduct)
 router.delete("/product/:id", authenticateAdmin, deleteProduct)
-// router.put("/product/:id", authenticateUser, changeToFavorite)
 router.put("/product/:id", authenticateAdmin, updateProduct)
 router.put("/product/feacture/:id", authenticateAdmin, toggleProductFeaturedStatus)
 

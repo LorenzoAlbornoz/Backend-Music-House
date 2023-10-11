@@ -17,7 +17,6 @@ const getAllCategories = async (req, res) => {
         categories
       });
     } catch (error) {
-      // error de servidor 500
       return res.status(500).json({
         mensaje: "Hubo un error, inténtelo más tarde",
         status: 500

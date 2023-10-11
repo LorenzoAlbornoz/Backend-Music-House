@@ -24,7 +24,6 @@ const getAllUsers = async (req, res) => {
       users,
     });
   } catch (error) {
-    // error de servidor 500
     return res.status(500).json({
       mensaje: "Hubo un error, inténtelo más tarde",
       status: 500,
@@ -56,7 +55,6 @@ const getUserByID = async (req, res) => {
       user
     });
   } catch (error) {
-    // error de servidor 500
     return res.status(500).json({
       mensaje: "Hubo un error, inténtelo más tarde",
       status: 500
@@ -118,7 +116,6 @@ const getUserByID = async (req, res) => {
         name: user.name,
         rol: user.rol
       };
-      // firma, recibe tres parametros
       const token = jwt.sign(payload, secret, {
         algorithm: process.env.JWT_ALGORITHM,
         expiresIn: "12h"
@@ -129,7 +126,6 @@ const getUserByID = async (req, res) => {
         token
       });
     } catch (error) {
-      // error de servidor 500
       return res.status(500).json({
         mensaje: "Hubo un error, inténtelo más tarde",
         status: 500
@@ -153,7 +149,6 @@ const getUserByID = async (req, res) => {
         status: 200,
       });
     } catch (error) {
-      // Error de servidor 500
       return res.status(500).json({
         mensaje: "Hubo un error, inténtelo más tarde",
         status: 500,
@@ -315,15 +310,10 @@ const addToFavorites = async (req, res) => {
     const isProductInFavorites = user.favorites.some((favProduct) =>
       favProduct.equals(product._id)
     );
-
-    // Variable para almacenar el nuevo estado de isFavorite
-    let newIsFavorite;
-
     // Si addToFavorites es verdadero y el producto no está en favoritos, agrégalo
     if (addToFavorites && !isProductInFavorites) {
       user.favorites.push(product);
       product.isFavorite = true; // Cambia isFavorite a true
-      newIsFavorite = true;
     }
     // Si addToFavorites es falso o el producto ya está en favoritos, lo quita
     else {
@@ -331,12 +321,11 @@ const addToFavorites = async (req, res) => {
         (favProduct) => !favProduct.equals(product._id)
       );
       product.isFavorite = false; // Cambia isFavorite a false
-      newIsFavorite = false;
     }
-    console.log(newIsFavorite)
 
     await user.save();
     await product.save();
+
     res.status(200).json({
       mensaje: "Producto agregado a favoritos correctamente",
       status: 200,
@@ -355,7 +344,6 @@ const getFavoriteProducts = async (req, res) => {
   const { id } = req.params;
 
   try {
-    // Buscar al usuario por su ID
     const user = await User.findById(id);
 
     if (!user) {

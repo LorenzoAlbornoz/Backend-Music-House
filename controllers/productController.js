@@ -58,35 +58,6 @@ const getProductByID = async (req, res) => {
     }
 };
 
-const getProductsByTitle = async (req, res) => {
-  const { title } = req.query;
-
-  try {
-    if (!title) {
-      return res.status(400).json({
-        mensaje: "El parámetro 'title' es requerido",
-        status: 400,
-      });
-    }
-
-    // Usar una expresión regular para buscar coincidencias parciales en el título
-    const products = await Product.find({
-      title: { $regex: new RegExp(title, "i") }, // "i" hace que la búsqueda sea insensible a mayúsculas/minúsculas
-    }).populate("category");
-
-    return res.status(200).json({
-      mensaje: "Productos encontrados",
-      status: 200,
-      products,
-    });
-  } catch (error) {
-    return res.status(500).json({
-      mensaje: "Hubo un error, inténtelo más tarde",
-      status: 500,
-    });
-  }
-};
-
 const createProduct = async (req, res) => {
     const { title, description, price, category, stock, isFeatured, shortDescription} = req.body;
     const {path} = req.file;
@@ -124,35 +95,6 @@ const createProduct = async (req, res) => {
         })
     }
 }
-
-const changeToFavorite = async (req, res) => {
-    const { id } = req.params;
-    const { favorite } = req.body;
-    const product = await Product.findById(id);
-    console.log(product)
-    try {
-      if (!product) {
-        return res.status(404).json({
-          mensaje: "Producto no encontrado",
-          status: 404,
-        });
-      }
-  
-      product.favorite = favorite;
-      await product.save();
-      res.status(200).json({
-        mensaje: "Producto actualizado correctamente",
-        status: 200,
-        product,
-      });
-    } catch (error) {
-      return res.status(500).json({
-        mensaje: "Hubo un error, inténtelo más tarde",
-        status: 500,
-      });
-    }
-  };
-
 
   const deleteProduct = async (req, res) => {
     const { id } = req.params;
@@ -210,7 +152,6 @@ const changeToFavorite = async (req, res) => {
       product
     });
     } catch (error) {
-      console.log(error)
       return res.status(500).json({
         mensaje: "Hubo un error, inténtelo más tarde",
         status: 500
@@ -239,7 +180,6 @@ const changeToFavorite = async (req, res) => {
         product,
       });
     } catch (error) {
-      console.log(error)
       return res.status(500).json({
         mensaje: 'Hubo un error, inténtelo más tarde',
         status: 500,
@@ -250,9 +190,7 @@ const changeToFavorite = async (req, res) => {
 module.exports = {
     getAllProducts,
     getProductByID,
-    getProductsByTitle,
     createProduct,
-    changeToFavorite,
     deleteProduct,
     updateProduct,
     toggleProductFeaturedStatus

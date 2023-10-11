@@ -31,6 +31,10 @@ const productSchema = new mongoose.Schema({
             message: "El stock debe ser mayor que 0" 
         }
     },
+    shortDescription:{
+    type: String,
+    require: true
+    },
     isFeatured: {
         type: Boolean,
         default: false 
@@ -39,9 +43,9 @@ const productSchema = new mongoose.Schema({
         type: Boolean,
         default: false 
     },
-    shortDescription:{
-    type: String,
-    require: true
+    quantity:{
+        type : Number,
+        default: 1
     }
 })
 ;

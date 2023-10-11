@@ -90,6 +90,9 @@ Los controladores son funciones que manejan las solicitudes HTTP entrantes y ges
 getAllUsers
 Esta función recupera todos los usuarios registrados en la base de datos.
 
+getUserByID
+Esta función recura un producto por su id registrado en la base de datos
+
 register
 La función register permite registrar nuevos usuarios en la aplicación. Además, se instala la librería bcrypt para habilitar la encriptación segura de contraseñas en la aplicación, garantizando la seguridad de las credenciales de usuario.
 
@@ -105,6 +108,12 @@ La función deleteUser está diseñada para que los administradores puedan elimi
 changeToAdmin
 La función changeToAdmin permite a los administradores cambiar el rol de un usuario entre "user" y "admin" y viceversa.
 
+addToFavorites
+Esta función permite modificar un producto de no favorito a favorito en la base de datos
+
+getFavoriteProducts
+Esta función pertime traer todos los productos que sean favoritos 
+
 ## Esquema de Usuario (userSchema)
 El esquema userSchema define la estructura en la que se guardan los datos de usuario en la base de datos. Incluye los siguientes campos:
 
@@ -112,6 +121,7 @@ name: Nombre del usuario.
 username: Nombre de usuario único.
 password: Contraseña del usuario (encriptada de manera segura).
 rol: Rol del usuario, que puede ser "user" o "admin".
+favoritos: Lista de productos favoritos
 
 ## Controlador de Categorías (categoryController)
 El controlador de categorías (categoryController) incluye las siguientes funciones:
@@ -146,6 +156,9 @@ La función deleteProduct elimina un producto de la base de datos.
 updateProduct
 La función updateProduct actualiza la información de un producto existente en la base de datos.
 
+toggleProductFeaturedStatus
+La funcion toggleProductFeaturedStatus cambia los productos de no destacados a destacados.
+
 Instalar Multer
 Para manejar la carga de archivos, como imágenes, en la aplicación, se instala Multer, una biblioteca de middleware que permite recibir archivos enviados a través de formularios.
 Para instalar multer:
@@ -162,13 +175,16 @@ npm install cloudinary
 ## Esquema de Producto (productSchema)
 El esquema productSchema define la estructura en la que se guardan los datos de productos en la base de datos. Incluye los siguientes campos:
 
-titulo: El título del producto.
-descripcion: Una descripción detallada del producto.
-precio: El precio del producto.
-categoria: La categoría a la que pertenece el producto.
-imagen: La URL o referencia a la imagen del producto (almacenada en Cloudinary).
+title: El título del producto.
+description: Una breve descripción del producto.
+price: El precio del producto.
+category: La categoría a la que pertenece el producto.
+image: La URL o referencia a la imagen del producto (almacenada en Cloudinary).
 stock: La cantidad de unidades disponibles en el stock.
-favorito: Un indicador que puede utilizarse para marcar el producto como favorito.
+shortDescription: Una descripción detallada del producto.
+isFeatured:  Un indicador que puede utilizarse para marcar el producto como destacado.
+isFavorite: Un indicador que puede utilizarse para marcar el producto como favorito.
+quantity: La cantidad de unidades del producto.
 
 Instalación de Passport y Estrategia Passport-JWT
 Para gestionar la autenticación de usuarios, utilizamos la librería Passport y la estrategia Passport-JWT para autenticación basada en tokens JWT. Esto permite una autenticación segura y eficiente en el servidor.

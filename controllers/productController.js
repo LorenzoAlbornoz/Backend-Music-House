@@ -79,7 +79,7 @@ const createProduct = async (req, res) => {
             image: cloudImg.secure_url,
             stock,
             isFeatured,
-            shortDescription
+            shortDescription,
         })
         await newProduct.save();
 

@@ -1,7 +1,9 @@
 const passport = require("passport");
 
 const authenticateUser = (req, res, next) => {
+
     passport.authenticate("jwt", (err, user, info)=> {
+        
         if(err){
             return res.status(500).json({
                 mensaje: "Error al autenticar el usuario",

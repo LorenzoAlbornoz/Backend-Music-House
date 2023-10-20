@@ -12,11 +12,13 @@ router.get("/user", authenticateAdmin, getAllUsers)
 router.get("/user/:id", authenticateAdmin, getUserByID)
 router.delete("/user/:id", authenticateAdmin, deleteUser)
 router.put("/user/:id", authenticateUser, updateUser)
+
 router.put("/admin/rol/:id", authenticateAdmin, changeToAdmin)
 router.post("/register", register)
 router.post("/login", login)
 router.post("/recoverPassword", recoverPassword)
-router.post("/user/favorite/:id", addToFavorites)
+
+router.post("/user/favorite/:id", authenticateUser, addToFavorites)
 router.get("/favorite/:id", authenticateUser, getFavoriteProducts)
 
 //Categorys Routes

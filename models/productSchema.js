@@ -10,9 +10,9 @@ const productSchema = new mongoose.Schema({
         type: String,
         required:true 
     },
-    price: { 
+    price: {
         type: Number,
-        required:true 
+        required: true,
     },
     category: {
         type: mongoose.Schema.Types.ObjectId,
@@ -24,12 +24,6 @@ const productSchema = new mongoose.Schema({
     stock: {
         type: Number,
         required: true,
-        validate: {
-            validator: function (value) {
-                return value > 0; 
-            },
-            message: "El stock debe ser mayor que 0" 
-        }
     },
     shortDescription:{
     type: String,

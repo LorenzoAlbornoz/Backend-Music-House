@@ -89,6 +89,7 @@ const createProduct = async (req, res) => {
             newProduct
         })
     } catch (error) {
+      console.log(error)
         return res.status(500).json({
             mensaje: "Hubo un error, inténtelo más tarde",
             status: 500

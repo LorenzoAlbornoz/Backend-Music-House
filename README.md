@@ -37,52 +37,52 @@ NodeJS - FrameWork Back-End
 
 ## Frameworks adicionales y otras implementaciones
 
-Express - Infraestructura web rápida, minimalista y flexible para Node.js
-nodemon - Actualiza tu servidor de Node cuando realizas cambios en algun archivo
-Bcrypt - Encriptación
-JWT - Generar tokens
-Mongoose - Modelado de objetos MongoDB para Node.js
-morgan - HTTP request logger middleware for node.js
-passport - Autenticaciones en NodeJs
-passport-jwt - Estrategia de Passport para la autenticación basada en tokens JWT (JSON Web Tokens).
-jsonwebtoken - Librería para la implementación de tokens JWT (JSON Web Tokens) en la autenticación de usuarios.
-dotenv - Variables de Entorno
-cors - Control de Acceso HTTP
-multer - Manejo de archivos en NodeJS
-cloudinary - Almacenamiento de imagenes y videos
-Base de Datos
-MongoDB Atlas - Cloud
+- Express - Infraestructura web rápida, minimalista y flexible para Node.js
+- nodemon - Actualiza tu servidor de Node cuando realizas cambios en algun archivo
+- Bcrypt - Encriptación
+- JWT - Generar tokens
+- Mongoose - Modelado de objetos MongoDB para Node.js
+- morgan - HTTP request logger middleware for node.js
+- passport - Autenticaciones en NodeJs
+- passport-jwt - Estrategia de Passport para la autenticación basada en tokens JWT (JSON Web Tokens).
+- jsonwebtoken - Librería para la implementación de tokens JWT (JSON Web Tokens) en la autenticación de usuarios.
+- dotenv - Variables de Entorno
+- cors - Control de Acceso HTTP
+- multer - Manejo de archivos en NodeJS
+- cloudinary - Almacenamiento de imagenes y videos
+- Base de Datos
+- MongoDB Atlas - Cloud
 
 ## Routes
 
 ## Users
 
-GET /api/v1/user
-GET /api/v1/user/:id
-DELETE /api/v1/user/:id
-PUT /api/v1/user/:id
-PUT /api/v1/admin/rol/:id
-POST /api/v1/recoverPassword
-POST /api/v1/user/favorite/:id
-GET /api/v1/favorite/:id
+- GET /api/v1/user
+- GET /api/v1/user/:id
+- DELETE /api/v1/user/:id
+- PUT /api/v1/user/:id
+- PUT /api/v1/admin/rol/:id
+- POST /api/v1/recoverPassword
+- POST /api/v1/user/favorite/:id
+- GET /api/v1/favorite/:id
 
 ## Registrar un nuevo usuario
-POST /api/v1/user/register
+- POST /api/v1/user/register
 
 ## Para loguearse y obtener el token de autenticacion:
-POST /api/v1/user/login
+- POST /api/v1/user/login
 
 ## Categorias Routes
-GET /api/v1/categories
-POST /api/v1/category
+- GET /api/v1/categories
+- POST /api/v1/category
 
 ## Products Routes
-GET /api/v1/products
-GET /api/v1/product/:_id
-POST /api/v1/product
-DELETE /api/v1/product/:id
-PUT /api/v1/product/:id
-PUT /api/v1/product/feature/:id
+- GET /api/v1/products
+- GET /api/v1/product/:_id
+- POST /api/v1/product
+- DELETE /api/v1/product/:id
+- PUT /api/v1/product/:id
+- PUT /api/v1/product/feature/:id
 
 ## Controlador de Usuarios (userController)
 Los controladores son funciones que manejan las solicitudes HTTP entrantes y gestionan la lógica de negocio de la aplicación. El controlador de usuarios (userController) incluye las siguientes funciones:
@@ -117,11 +117,11 @@ Esta función pertime traer todos los productos que sean favoritos
 ## Esquema de Usuario (userSchema)
 El esquema userSchema define la estructura en la que se guardan los datos de usuario en la base de datos. Incluye los siguientes campos:
 
-name: Nombre del usuario.
-username: Nombre de usuario único.
-password: Contraseña del usuario (encriptada de manera segura).
-rol: Rol del usuario, que puede ser "user" o "admin".
-favoritos: Lista de productos favoritos
+- name: Nombre del usuario.
+- username: Nombre de usuario único.
+- password: Contraseña del usuario (encriptada de manera segura).
+- rol: Rol del usuario, que puede ser "user" o "admin".
+- favoritos: Lista de productos favoritos
 
 ## Controlador de Categorías (categoryController)
 El controlador de categorías (categoryController) incluye las siguientes funciones:
@@ -135,8 +135,8 @@ La función getAllCategory recupera todas las categorías creadas en la base de 
 ## Esquema de Categoría (categorySchema)
 El esquema categorySchema define la estructura en la que se guardan los datos de categoría en la base de datos. Incluye los siguientes campos:
 
-name: El nombre de la categoría.
-createdAt: La fecha en que se creó la categoría (tipo de dato Date).
+- name: El nombre de la categoría.
+- createdAt: La fecha en que se creó la categoría (tipo de dato Date).
 products: Una relación uno a muchos que conecta una categoría con los productos relacionados. Esto se logra a través del ID de la categoría en los productos.
 
 ## Controlador de Productos (productController)
@@ -176,16 +176,16 @@ npm install cloudinary
 ## Esquema de Producto (productSchema)
 El esquema productSchema define la estructura en la que se guardan los datos de productos en la base de datos. Incluye los siguientes campos:
 
-title: El título del producto.
-description: Una breve descripción del producto.
-price: El precio del producto.
-category: La categoría a la que pertenece el producto.
-image: La URL o referencia a la imagen del producto (almacenada en Cloudinary).
-stock: La cantidad de unidades disponibles en el stock.
-shortDescription: Una descripción detallada del producto.
-isFeatured:  Un indicador que puede utilizarse para marcar el producto como destacado.
-isFavorite: Un indicador que puede utilizarse para marcar el producto como favorito.
-quantity: La cantidad de unidades del producto.
+- title: El título del producto.
+- description: Una breve descripción del producto.
+- price: El precio del producto.
+- category: La categoría a la que pertenece el producto.
+- image: La URL o referencia a la imagen del producto (almacenada en Cloudinary).
+- stock: La cantidad de unidades disponibles en el stock.
+- shortDescription: Una descripción detallada del producto.
+- isFeatured:  Un indicador que puede utilizarse para marcar el producto como destacado.
+- isFavorite: Un indicador que puede utilizarse para marcar el producto como favorito.
+- quantity: La cantidad de unidades del producto.
 
 Instalación de Passport y Estrategia Passport-JWT
 Para gestionar la autenticación de usuarios, utilizamos la librería Passport y la estrategia Passport-JWT para autenticación basada en tokens JWT. Esto permite una autenticación segura y eficiente en el servidor.

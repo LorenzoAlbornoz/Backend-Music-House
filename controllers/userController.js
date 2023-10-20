@@ -76,7 +76,7 @@ const getUserByID = async (req, res) => {
       const newUser = new User({
         name,
         username,
-        password: encryptPassword(password)
+        password: encryptPassword(password),
       });
   
       await newUser.save();
@@ -298,29 +298,26 @@ const addToFavorites = async (req, res) => {
     }
 
     if (!product) {
-      return res.status(404).json({
+      return res.status(400).json({
         mensaje: " no encontrado",
-        status: 404,
+        status: 400,
       });
     }
 
-    // Verifica si el producto ya está en la lista de favoritos del usuario
-    // el some recorre todo el arreglo, devuelve true si safistafe la condicion de igualdad
-    //el equals toma cada elemento del arreglo y verifica si es igual al id
     const isProductInFavorites = user.favorites.some((favProduct) =>
       favProduct.equals(product._id)
     );
-    // Si addToFavorites es verdadero y el producto no está en favoritos, agrégalo
+
     if (addToFavorites && !isProductInFavorites) {
       user.favorites.push(product);
-      product.isFavorite = true; // Cambia isFavorite a true
+      product.isFavorite = true;
     }
-    // Si addToFavorites es falso o el producto ya está en favoritos, lo quita
+
     else {
       user.favorites = user.favorites.filter(
         (favProduct) => !favProduct.equals(product._id)
       );
-      product.isFavorite = false; // Cambia isFavorite a false
+      product.isFavorite = false; 
     }
 
     await user.save();

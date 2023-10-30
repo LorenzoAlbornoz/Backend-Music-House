@@ -7,7 +7,6 @@ const upload = require ("../middlewares/multer")
 
 const router = require ("express").Router()
 
-// Users Routes
 router.get("/user", authenticateAdmin, getAllUsers)
 router.get("/user/:id", authenticateAdmin, getUserByID)
 router.delete("/user/:id", authenticateAdmin, deleteUser)
@@ -21,12 +20,10 @@ router.post("/recoverPassword", recoverPassword)
 router.post("/user/favorite/:id", authenticateUser, addToFavorites)
 router.get("/favorite/:id", authenticateUser, getFavoriteProducts)
 
-//Categorys Routes
 router.get("/categories", getAllCategories)
 router.post("/category", authenticateAdmin, createCategory)
 router.delete("/category/:id", authenticateAdmin, deleteCategory)
 
-//Products Routes
 router.get("/products", getAllProducts)
 router.get("/product/:_id", getProductByID)
 router.post("/product", authenticateAdmin, upload.single("image"), createProduct)

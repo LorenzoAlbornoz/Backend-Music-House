@@ -10,8 +10,6 @@ const passport = require("passport");
 
 const app = express();
 
-
-//Middlewares
 app.use(cors())
 app.options('*', cors())
 app.use(express.json())
@@ -24,16 +22,12 @@ cloudinary.config({
     api_secret: process.env.APY_SECRET
 });
 
-//passport
 passport.use("jwt", jwtStrategy)
 
-//Configuracion rutas
 app.use(process.env.API, router)
 
-//Puerto
 const port = process.env.PORT
 
-//Conexion base de datos
 mongoDBConnection()
 
 app.listen(port, () => {

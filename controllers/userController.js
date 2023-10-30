@@ -161,8 +161,6 @@ const changeToAdmin = async (req, res) => {
   const { id } = req.params;
   const { rol } = req.body;
   const user = await User.findById(id);
-  console.log(user)
-  console.log(rol)
   try {
     if (!user) {
       return res.status(404).json({
@@ -329,7 +327,6 @@ const addToFavorites = async (req, res) => {
       user,
     });
   } catch (error) {
-    console.error(error)
     return res.status(500).json({
       mensaje: "Hubo un error, inténtelo más tarde",
       status: 500,
